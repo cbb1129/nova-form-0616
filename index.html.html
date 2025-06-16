@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NOVA 活動表單</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans TC', sans-serif;
+      background-color: #fff;
+    }
+
+    .centered-form-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .custom-form {
+      width: 100%;
+      max-width: 400px;
+      font-family: "Noto Sans TC", sans-serif;
+    }
+
+    .custom-form h2 {
+      text-align: center;
+      font-size: 60px;
+      font-weight: 700;
+      margin-bottom: 60px;
+    }
+
+    .custom-form h2 span {
+      font-weight: 100;
+    }
+
+    .form-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      width: 100px;
+      text-align: right;
+      font-weight: bold;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+
+    .form-group input {
+      flex: 1;
+      padding: 10px 15px;
+      border-radius: 20px;
+      border: 1px solid #aaa;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .form-group select,
+    #storeSelectPanel {
+      flex: 1;
+    }
+
+    .checkbox-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .checkbox-wrapper label {
+      display: flex;
+      align-items: flex-start;
+      text-align: left;
+      margin-bottom: 10px;
+      width: 320px;
+      line-height: 1.5;
+    }
+
+    .checkbox-wrapper input[type="checkbox"] {
+      margin-right: 8px;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .checkbox-wrapper a {
+      color: black;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+    }
+
+    .custom-form button {
+      display: block;
+      margin: 25px auto 0;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      padding: 10px 30px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .custom-form button:hover {
+      opacity: 0.9;
+    }
+
+    @media (max-width: 600px) {
+      .form-group {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .form-group label {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 5px;
+      }
+
+      .form-group input {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .checkbox-wrapper label {
+        width: 100%;
+        padding-left: 5px;
+      }
+
+      .custom-form h2 {
+        font-size: 40px;
+        margin-bottom: 40px;
+      }
+
+      .custom-form {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="centered-form-wrapper">
+<form class="custom-form" id="customOmoForm">
+<h2><strong>預測</strong><span>金額</span></h2>
+<div class="form-group">
+<label for="name">姓名</label>
+<input id="name" name="customername" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="phone">手機</label>
+<input id="phone" name="customerphone" required="" type="tel"/>
+</div>
+<div class="form-group">
+<label for="email">Email</label>
+<input id="email" name="customeremail" required="" type="email"/>
+</div>
+<div class="form-group">
+<label for="store">最近門市</label>
+<div id="storeSelectPanel"></div>
+</div>
+<div class="form-group">
+<label for="amount">我猜的金額是</label>
+<input id="amount" name="guessamount" required="" type="text"/>
+</div>
+<div class="checkbox-wrapper">
+<label>
+<input id="ruleCheck" required="" type="checkbox"/>
+          我已閱讀
+          <a href="https://yourdomain.com/rules" target="_blank">活動辦法並同意相關活動條款</a>
+</label>
+<label>
+<input id="privacyCheck" required="" type="checkbox"/>
+          我已閱讀
+          <a href="https://yourdomain.com/privacy" target="_blank">NOVA個人資料保護政策</a>
+</label>
+</div>
+<button type="submit">確認送出</button>
+</form>
+<!-- 隱藏 Google 表單同步送出區塊 -->
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+<form action="https://docs.google.com/forms/d/e/1FAIpQLSeD-pBt2vIsL9Tdof0gItAEEd1e_nl8llqx0MFgG079FHhJSg/formResponse" id="googleForm" method="POST" style="display:none;" target="hidden_iframe">
+<input id="g_name" name="entry.886727629" type="text"/>
+<input id="g_phone" name="entry.658375139" type="text"/>
+<input id="g_email" name="entry.213564034" type="email"/>
+<input id="g_amount" name="entry.1803087691" type="text"/>
+</form>
+</div>
+<script>
+document.querySelector("form").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const email = document.getElementById("email").value;
+  const amount = document.getElementById("amount").value;
+
+  const formData = new URLSearchParams();
+  formData.append("name", name);
+  formData.append("phone", phone);
+  formData.append("email", email);
+  formData.append("amount", amount);
+
+  await fetch("https://script.google.com/macros/s/AKfycbylyyGVIS8s4pfs3cg3gpOTu5Zr6jh1fCn2CGw7jU0QMHL8NNopF9tGD3gwcaaM-V2ALg/exec", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: formData
+  });
+
+  OPSDK.addCoupon();
+});
+</script>
+<script async="" crossorigin="anonymous" defer="" src="https://www.omohoplus.com/sdk/OmohoPlusSDK.js"></script>
+<script>
+window.opsdkAsyncInit = function () {
+  OPSDK.init({
+    activityId: 7,
+    onStoreListReady: function (storeList) {
+      const storeSelect = document.getElementById("store");
+      if (!storeSelect) return;
+      storeSelect.innerHTML = '<option value=""></option>';
+      storeList.forEach(store => {
+        const option = document.createElement("option");
+        option.value = store.name;
+        option.text = store.name;
+        storeSelect.appendChild(option);
+      });
+    }
+  });
+};
+</script><script async="" crossorigin="anonymous" defer="" src="https://www.omohoplus.com/sdk/OmohoPlusSDK.js"></script><script>
+document.querySelector("form.custom-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const email = document.getElementById("email").value;
+  const amount = document.getElementById("amount").value;
+
+  // 送出至 Google Apps Script
+  fetch("https://script.google.com/macros/s/AKfycbxtngMzLkMxJ-5uz3NcJYO1TMsHyAmySOwNaItvsDsK2MeuQ1LL37iJ9SOD-z3Tfnr_UA/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams({
+      name,
+      phone,
+      email,
+      amount
+    }),
+  })
+  .then(response => response.text())
+  .then(result => {
+    console.log("送出成功:", result);
+    // 觸發 SDK 領券動作
+    OPSDK.addCoupon();
+    // 導向成功頁
+    window.location.href = "https://nova.omohoplus.com/nova-finish/";
+  })
+  .catch(error => {
+    console.error("送出失敗:", error);
+    alert("送出失敗，請稍後再試");
+  });
+});
+</script></body>
+</html>
