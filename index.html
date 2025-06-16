@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="zh-Hant">
@@ -222,12 +223,12 @@ select#store {
 <label>
 <input id="ruleCheck" required="" type="checkbox"/>
           我已閱讀
-          <a href="https://nova.omohoplus.com/privacy-policy/" target="_blank">活動辦法並同意相關活動條款</a>
+          <a href="https://yourdomain.com/rules" target="_blank">活動辦法並同意相關活動條款</a>
 </label>
 <label>
 <input id="privacyCheck" required="" type="checkbox"/>
           我已閱讀
-          <a href="https://nova.omohoplus.com/privacy-policy/" target="_blank">NOVA個人資料保護政策</a>
+          <a href="https://yourdomain.com/privacy" target="_blank">NOVA個人資料保護政策</a>
 </label>
 </div>
 <button type="submit">確認送出</button>
@@ -310,7 +311,7 @@ document.querySelector("form.custom-form").addEventListener("submit", function (
     // 觸發 SDK 領券動作
     OPSDK.addCoupon();
     // 導向成功頁
-    window.location.href = "https://nova.omohoplus.com/nova-finish/";
+    window.top.location.href = "https://nova.omohoplus.com/nova-finish/";
   })
   .catch(error => {
     console.error("送出失敗:", error);
